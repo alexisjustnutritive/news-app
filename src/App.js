@@ -1,8 +1,9 @@
 import React from 'react';
 import './App.scss';
 import { Container } from 'react-bootstrap';
-import Header from './components/Header/Header';
+import Header from './components/common/Header/Header';
 import CountryCodes from './country-codes-slim-2.json';
+import Footer from './components/common/Footer/Footer';
 
 class App extends React.Component {
 
@@ -13,9 +14,10 @@ class App extends React.Component {
     render() {
         return (
         <React.Fragment>
+            <Header countryCodes={ this.state.countryCodes } />
             <Container fluid={true}>
-                <Header countryCodes={ this.state.countryCodes } />
             </Container>
+            <Footer />
         </React.Fragment>
       );
     }

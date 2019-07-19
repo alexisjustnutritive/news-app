@@ -1,7 +1,7 @@
 import React from 'react';
 import './header.scss';
 
-import { Container, Navbar, Nav, NavDropdown, Form, FormControl, Button } from 'react-bootstrap';
+import { Navbar, Nav, Form, FormControl } from 'react-bootstrap';
 
 const Header = ( { countryCodes } ) => {
     return (
@@ -28,20 +28,13 @@ const Header = ( { countryCodes } ) => {
                             <Form.Group>
                                 <Form.Label>Country</Form.Label>
                                 <Form.Control as="select">
-                                    { 
-                                        countryCodes.map( country => {
-                                            <p>Hello World</p>        
-                                        } )
-                                    }
-                                    
+                                    { countryCodes.map( country => <option key={ country.country }>{ country.name }</option>) }
                                 </Form.Control>
                             </Form.Group>
-
                         </Form>
-                        <Nav.Link href="#home">Home</Nav.Link>
-                        <Nav.Link href="#link">Link</Nav.Link>
                     </Nav>
                 </Navbar.Collapse>
+                <h5 className="flex-grow-1 text-center">All news in one place</h5>
             </Navbar>
     )
 }
