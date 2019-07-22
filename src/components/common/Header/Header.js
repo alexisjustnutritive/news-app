@@ -1,13 +1,20 @@
 import React from 'react';
 import './header.scss';
 
-import { Navbar, Nav, Form, FormControl } from 'react-bootstrap';
+import { Navbar, Nav, Form, FormControl, Badge } from 'react-bootstrap';
 
-const Header = ( { countryCodes } ) => {
+const Header = ( { category, countryCodes, country, Uuid } ) => {
+    
+    let countryName = countryCodes.find( element => element[ 'alpha-2' ] === country );
+    let countrySelected = countryName !== undefined ? <span className="badge badge-secondary mx-2">country: { countryName.name }</span> : null;
+
+    
+
     return (
-            <Navbar bg="light" expand="sd">
-                <Navbar.Toggle aria-controls="basic-navbar-nav" />
-                <Navbar.Collapse id="basic-navbar-nav" >
+        <header>
+            <Navbar bg="dark" variant="dark" expand="sd" className="m-0 text-white" style={{ padding: "0.8rem 0" }}>
+                <Navbar.Toggle aria-controls="basic-navbar-nav" className="text-white" />
+                <Navbar.Collapse id="basic-navbar-nav" className="mx-4 py-2 text-white" >
                     <Nav className="mr-auto py-4">
                         <Form>
                             <Form.Group>
@@ -28,7 +35,7 @@ const Header = ( { countryCodes } ) => {
                             <Form.Group>
                                 <Form.Label>Country</Form.Label>
                                 <Form.Control as="select">
-                                    { countryCodes.map( country => <option key={ country.country }>{ country.name }</option>) }
+                                    { countryCodes.map( countryitem => <option key={ Uuid() }>{ countryitem.name }</option>) }
                                 </Form.Control>
                             </Form.Group>
                         </Form>
@@ -36,7 +43,12 @@ const Header = ( { countryCodes } ) => {
                 </Navbar.Collapse>
                 <h5 className="flex-grow-1 text-center">All news in one place</h5>
             </Navbar>
-    )
+            <div className="filter-container d-flex justify-items-center p-2 bg-white">
+                { countrySelected }
+                <span className="badge badge-secondary">category: { category }</span>
+            </div>
+        </header>
+    );
 }
 
-export default Header
+export default Header;
