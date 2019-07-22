@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import './newsItem.scss';
 
 const NewsItem = ( { newsitem } ) => {
@@ -14,6 +15,10 @@ const NewsItem = ( { newsitem } ) => {
             </div>
         </div>
     )
+}
+
+NewsItem.propTypes = {
+    newsItem: PropTypes.object
 }
 
 export default NewsItem;

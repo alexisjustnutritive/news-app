@@ -4,7 +4,7 @@ import './footer.scss';
 const Footer = () => {
     return (
         <footer className="w-100 text-center bg-dark text-white">
-            <p>News App 2019</p>
+            <p>News App { new Date().getFullYear() }</p>
         </footer>
     )
 }

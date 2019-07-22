@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import './header.scss';
 
 import { Navbar, Nav, Form, FormControl } from 'react-bootstrap';
@@ -18,17 +19,6 @@ class Header extends React.Component {
             countryName: countryName,
             query: ''
         } );
-    }
-
-    debounce = (fn, time) => {
-        let timeout;
-        
-        return function() {
-            const functionCall = () => fn.apply(this, arguments);
-            
-            clearTimeout(timeout);
-            timeout = setTimeout(functionCall, time);
-        }
     }
 
     handleChange = ( e ) =>{
@@ -87,6 +77,15 @@ class Header extends React.Component {
             </header>
         );
     }
+}
+
+Header.propTypes = {
+    category: PropTypes.string.isRequired,
+    countryName: PropTypes.string.isRequired,
+    countryCodes: PropTypes.array.isRequired,
+    Uuid: PropTypes.func.isRequired,
+    loadNews: PropTypes.func.isRequired,
+    loadNewsEverything: PropTypes.func.isRequired
 }
 
 export default Header;

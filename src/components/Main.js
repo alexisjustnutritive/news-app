@@ -1,6 +1,7 @@
 import React from 'react'
 import NewsItem from './NewsItem/NewsItem';
 import { Container } from 'react-bootstrap';
+import PropTypes from 'prop-types';
 
 const Main = ( { news, Uuid } ) => {
     return (
@@ -10,6 +11,11 @@ const Main = ( { news, Uuid } ) => {
             </div>
         </Container>
     )
+}
+
+Main.propTypes = {
+    news: PropTypes.array.isRequired,  
+    Uuid: PropTypes.func.isRequired
 }
 
 export default Main;
