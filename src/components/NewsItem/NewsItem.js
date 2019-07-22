@@ -10,7 +10,7 @@ const NewsItem = ( { newsitem } ) => {
                 <p className="card-text">
                     { newsitem.description }
                 </p>
-                <a href={ newsitem.url } className="text-dark font-weight-bold">see more..</a>
+                <a href={ newsitem.url } className="text-danger font-weight-bold">see more..</a>
             </div>
         </div>
     )

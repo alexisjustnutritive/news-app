@@ -11,7 +11,8 @@ import Main from './components/Main';
 class App extends React.Component {
     state = {
         category: 'general',
-        country: 'US',
+        countryName: 'United States of America',
+        countryCode: 'US',
         countryCodes: CountryCodes,
         news: []
     }
@@ -20,25 +21,31 @@ class App extends React.Component {
         this.loadNews();
     }
 
-    loadNews = async ( category = 'general', country = 'US' ) => {
+    loadNews = async ( category = 'general', countryName = 'United States of America' ) => {
+
+        let country = this.state.countryCodes.find( element => element.name === countryName )[ 'alpha-2' ];
+
         let apiUrl = `https://newsapi.org/v2/top-headlines?country=${ country }&category=${ category }&apiKey=11eefc26b2054093a04c8a326d74eac6`;
         const res = await fetch( apiUrl );
         const newsData = await res.json();
 
         this.setState( {
+            category: category,
+            countryName: countryName,
+            countryCode: country,
             news: newsData.articles
         } );
     }
 
     render() {
         return (
-        <React.Fragment>
-            <div className="container bg-dark p-0">
-                <Header category={ this.state.category } country={ this.state.country } countryCodes={ this.state.countryCodes } Uuid={ Uuid }/>
-                <Main news= { this.state.news } Uuid={ Uuid }/>  
-                <Footer />
-            </div>
-        </React.Fragment>
+            <React.Fragment>
+                <div className="container bg-dark p-0">
+                    <Header category={ this.state.category } countryName={ this.state.countryName } countryCodes={ this.state.countryCodes } Uuid={ Uuid } loadNews={ this.loadNews }/>
+                    <Main news= { this.state.news } Uuid={ Uuid }/>  
+                    <Footer />
+                </div>
+            </React.Fragment>
       );
     }
 }
