@@ -6,7 +6,7 @@ const Main = ( { news, Uuid } ) => {
     return (
         <Container className="bg-dark">
             <div className="card-deck justify-content-around">
-                { news.map( newsitem => <NewsItem newsitem={ newsitem } key={ Uuid() } /> ) }
+                { news !== undefined ? news.map( newsitem => <NewsItem newsitem={ newsitem } key={ Uuid() } /> ) : null }
             </div>
         </Container>
     )

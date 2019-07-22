@@ -1,7 +1,7 @@
 import React from 'react';
 import './header.scss';
 
-import { Navbar, Nav, Form, FormControl, Badge } from 'react-bootstrap';
+import { Navbar, Nav, Form, FormControl } from 'react-bootstrap';
 
 class Header extends React.Component {
 
@@ -15,14 +15,32 @@ class Header extends React.Component {
 
         this.setState( {
             category: category,
-            countryName: countryName
+            countryName: countryName,
+            query: ''
         } );
     }
 
+    debounce = (fn, time) => {
+        let timeout;
+        
+        return function() {
+            const functionCall = () => fn.apply(this, arguments);
+            
+            clearTimeout(timeout);
+            timeout = setTimeout(functionCall, time);
+        }
+    }
+
     handleChange = ( e ) =>{
-        this.setState( { [e.target.name]: e.target.value }, () => {
-            this.props.loadNews( this.state.category, this.state.countryName );
-            } );
+        if ( e.target.name === 'query' ) {
+            this.setState( { [e.target.name]: e.target.value }, () => {
+                this.props.loadNewsEverything( this.state.query );
+                } );
+        } else {
+            this.setState( { [e.target.name]: e.target.value }, () => {
+                this.props.loadNews( this.state.category, this.state.countryName );
+                } );
+        }
     }
     
     render() {
@@ -36,7 +54,7 @@ class Header extends React.Component {
                         <Nav className="mr-auto py-4">
                             <Form>
                                 <Form.Group>
-                                    <FormControl type="text" placeholder="Search" className="mr-sm-2" />
+                                    <FormControl type="text" placeholder="Search" className="mr-sm-2" name="query" onChange={ this.handleChange } />
                                 </Form.Group>
                                 <Form.Group>
                                     <Form.Label>Category</Form.Label>
